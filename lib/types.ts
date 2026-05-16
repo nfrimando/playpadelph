@@ -56,6 +56,12 @@ export interface RankingsMeta {
 
 export type TournamentStatus = 'open' | 'closed' | 'full' | 'upcoming' | 'past'
 
+export interface DbProfile {
+  id: string
+  role: 'user' | 'admin'
+  created_at: string
+}
+
 export interface Tournament {
   id: string
   year: number

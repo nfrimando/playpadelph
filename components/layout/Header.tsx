@@ -11,6 +11,8 @@ const NAV_LINKS = [
 export default function Header() {
   const pathname = usePathname()
 
+  if (pathname.startsWith('/admin')) return null
+
   return (
     <header className="bg-green-dark h-[62px] flex items-center justify-between px-9 sticky top-0 z-[300] shadow-[0_2px_16px_rgba(0,0,0,.22)]">
       <Link href="/" className="flex items-center">
