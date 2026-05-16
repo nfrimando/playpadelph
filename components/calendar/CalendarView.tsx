@@ -12,6 +12,7 @@ interface YearData {
 
 interface CalendarViewProps {
   years: YearData[]
+  currentYear: number
 }
 
 function groupByMonth(tournaments: Tournament[]) {
@@ -22,14 +23,14 @@ function groupByMonth(tournaments: Tournament[]) {
   }))
 }
 
-export default function CalendarView({ years }: CalendarViewProps) {
-  const [activeYear, setActiveYear] = useState(years[0]?.year ?? 2026)
-  const [showPast2025, setShowPast2025] = useState(false)
+export default function CalendarView({ years, currentYear }: CalendarViewProps) {
+  const [activeYear, setActiveYear] = useState(years[0]?.year ?? currentYear)
+  const [showCompleted, setShowCompleted] = useState(false)
 
   const currentYearData = years.find(y => y.year === activeYear)
   const allTournaments = currentYearData?.tournaments ?? []
   const tournaments =
-    activeYear === 2025 && !showPast2025
+    activeYear === currentYear && !showCompleted
       ? allTournaments.filter(t => t.status !== 'past')
       : allTournaments
 
@@ -82,12 +83,12 @@ export default function CalendarView({ years }: CalendarViewProps) {
 
       {/* Content */}
       <div className="max-w-content mx-auto px-9 py-12 pb-[72px]">
-        {activeYear === 2025 && (
+        {activeYear === currentYear && (
           <label className="flex items-center gap-2.5 mb-6 cursor-pointer select-none">
             <input
               type="checkbox"
-              checked={showPast2025}
-              onChange={e => setShowPast2025(e.target.checked)}
+              checked={showCompleted}
+              onChange={e => setShowCompleted(e.target.checked)}
               className="accent-green w-4 h-4 cursor-pointer"
             />
             <span className="text-xs text-mid tracking-[0.5px] cursor-pointer">

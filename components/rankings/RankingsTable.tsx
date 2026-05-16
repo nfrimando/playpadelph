@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import type { PlayerRanking, RankingCategory } from '@/lib/types'
 
 const FLAGS: Record<string, string> = {
@@ -111,10 +112,27 @@ export default function RankingsTable({ category, players }: RankingsTableProps)
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-[11px]">
-                      <div className="w-[34px] h-[34px] rounded-full bg-green text-oat flex items-center justify-center font-display text-[13px] font-semibold shrink-0">
-                        {getInitials(player.name)}
-                      </div>
-                      <span className="font-semibold text-[13.5px] text-ink">{player.name}</span>
+                      {player.image_link ? (
+                        <img
+                          src={player.image_link}
+                          alt={player.name}
+                          className="w-[34px] h-[34px] rounded-full object-cover shrink-0"
+                        />
+                      ) : (
+                        <div className="w-[34px] h-[34px] rounded-full bg-green text-oat flex items-center justify-center font-display text-[13px] font-semibold shrink-0">
+                          {getInitials(player.name)}
+                        </div>
+                      )}
+                      {player.id != null ? (
+                        <Link
+                          href={`/players/${player.id}`}
+                          className="font-semibold text-[13.5px] text-ink hover:text-green transition-colors"
+                        >
+                          {player.name}
+                        </Link>
+                      ) : (
+                        <span className="font-semibold text-[13.5px] text-ink">{player.name}</span>
+                      )}
                     </div>
                   </td>
                   <td className="px-4 py-3 text-center text-[20px] w-[52px]">

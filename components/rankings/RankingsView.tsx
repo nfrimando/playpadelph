@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Podium from './Podium'
 import RankingsTable from './RankingsTable'
-import type { Rankings, RankingCategory } from '@/lib/types'
+import type { Rankings, RankingCategory, RankingsMeta } from '@/lib/types'
 
 const CATEGORIES: { key: RankingCategory; label: string }[] = [
   { key: 'mo', label: "Men's Open" },
@@ -15,9 +15,10 @@ const CATEGORIES: { key: RankingCategory; label: string }[] = [
 interface RankingsViewProps {
   data: Rankings
   playerCount: number
+  meta: RankingsMeta
 }
 
-export default function RankingsView({ data, playerCount }: RankingsViewProps) {
+export default function RankingsView({ data, playerCount, meta }: RankingsViewProps) {
   const [active, setActive] = useState<RankingCategory>('mo')
 
   return (
@@ -37,13 +38,13 @@ export default function RankingsView({ data, playerCount }: RankingsViewProps) {
         </p>
         <div className="inline-flex items-center gap-2 bg-white/[0.08] border border-white/[0.12] rounded-[2px] px-3.5 py-1.5 mt-5 text-[10px] tracking-[2px] uppercase text-oat/60">
           <span className="w-1.5 h-1.5 rounded-full bg-matcha shrink-0" />
-          May 2025 – Apr 2026
+          {meta.periodStart} – {meta.periodEnd}
         </div>
         <div className="flex gap-10 mt-9 pt-8 border-t border-oat/10">
           {[
-            { value: '4',           label: 'Categories' },
-            { value: `${playerCount}+`, label: 'Ranked Players' },
-            { value: '4',           label: 'Tournaments' },
+            { value: String(meta.categoryCount), label: 'Categories' },
+            { value: `${playerCount}+`,           label: 'Ranked Players' },
+            { value: String(meta.tournamentCount), label: 'Tournaments' },
             { value: 'Rolling',     label: '52-Week Points' },
           ].map(({ value, label }) => (
             <div key={label}>

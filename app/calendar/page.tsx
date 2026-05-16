@@ -1,12 +1,17 @@
-import { tournaments } from '@/lib/data/tournaments'
+import { getTournamentsForCalendar } from '@/lib/db/tournaments'
 import CalendarView from '@/components/calendar/CalendarView'
 
-export default function CalendarPage() {
-  const years = [2026, 2025].map(year => ({
+export default async function CalendarPage() {
+  const all = await getTournamentsForCalendar()
+
+  const uniqueYears = [...new Set(all.map(t => t.year))].sort((a, b) => b - a)
+  const years = uniqueYears.map(year => ({
     year,
-    tournaments: tournaments.filter(t => t.year === year),
-    total: tournaments.filter(t => t.year === year).length,
+    tournaments: all.filter(t => t.year === year),
+    total: all.filter(t => t.year === year).length,
   }))
 
-  return <CalendarView years={years} />
+  const currentYear = new Date().getFullYear()
+
+  return <CalendarView years={years} currentYear={currentYear} />
 }

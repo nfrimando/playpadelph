@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { PlayerRanking } from '@/lib/types'
 
 const FLAGS: Record<string, string> = {
@@ -32,9 +33,19 @@ function PodiumCard({ player, position }: PodiumCardProps) {
         <span className={`font-display text-5xl font-semibold leading-none mb-3 block ${numeralColors[0]}`}>
           {numeral}
         </span>
-        {flag && <span className="text-[26px] block mb-1.5">{flag}</span>}
-        <div className="font-display text-lg font-semibold leading-tight mb-0.5 text-oat">{player.name}</div>
-        <span className="text-[9px] tracking-[2px] uppercase block mb-[18px] text-oat/42">{player.nationality || '—'}</span>
+        {player.image_link ? (
+          <img src={player.image_link} alt={player.name} className="w-14 h-14 rounded-full object-cover mx-auto mb-2" />
+        ) : flag ? (
+          <span className="text-[26px] block mb-1.5">{flag}</span>
+        ) : null}
+        {player.id != null ? (
+          <Link href={`/players/${player.id}`} className="font-display text-lg font-semibold leading-tight mb-0.5 text-oat hover:opacity-75 transition-opacity block">
+            {player.name}
+          </Link>
+        ) : (
+          <div className="font-display text-lg font-semibold leading-tight mb-0.5 text-oat">{player.name}</div>
+        )}
+        {player.nationality && <span className="text-[9px] tracking-[2px] uppercase block mb-[18px] text-oat/42">{player.nationality}</span>}
         <span className={`font-display text-[42px] font-bold block ${pointColors[0]}`}>
           {player.points.toLocaleString()}
         </span>
@@ -48,9 +59,19 @@ function PodiumCard({ player, position }: PodiumCardProps) {
       <span className={`font-display text-5xl font-semibold leading-none mb-3 block ${numeralColors[position]}`}>
         {numeral}
       </span>
-      {flag && <span className="text-[26px] block mb-1.5">{flag}</span>}
-      <div className="font-display text-lg font-semibold leading-tight mb-0.5 text-ink">{player.name}</div>
-      <span className="text-[9px] tracking-[2px] uppercase block mb-[18px] text-mid">{player.nationality || '—'}</span>
+      {player.image_link ? (
+        <img src={player.image_link} alt={player.name} className="w-14 h-14 rounded-full object-cover mx-auto mb-2" />
+      ) : flag ? (
+        <span className="text-[26px] block mb-1.5">{flag}</span>
+      ) : null}
+      {player.id != null ? (
+        <Link href={`/players/${player.id}`} className="font-display text-lg font-semibold leading-tight mb-0.5 text-ink hover:text-green transition-colors block">
+          {player.name}
+        </Link>
+      ) : (
+        <div className="font-display text-lg font-semibold leading-tight mb-0.5 text-ink">{player.name}</div>
+      )}
+      {player.nationality && <span className="text-[9px] tracking-[2px] uppercase block mb-[18px] text-mid">{player.nationality}</span>}
       <span className={`font-display text-[42px] font-bold block ${pointColors[position]}`}>
         {player.points.toLocaleString()}
       </span>

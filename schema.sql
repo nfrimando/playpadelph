@@ -7,6 +7,8 @@ CREATE TABLE public.events (
   category text NOT NULL,
   start_date date NOT NULL,
   end_date date NOT NULL,
+  venue text,
+  status text,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   updated_at timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT events_pkey PRIMARY KEY (id)
@@ -18,6 +20,7 @@ CREATE TABLE public.players (
   image_link text,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   updated_at timestamp with time zone NOT NULL DEFAULT now(),
+  nationality text DEFAULT ''::text,
   CONSTRAINT players_pkey PRIMARY KEY (id)
 );
 CREATE TABLE public.points (

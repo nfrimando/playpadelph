@@ -1,5 +1,12 @@
-import type { Tournament } from '@/lib/types'
-import { STATUS_CONFIG } from '@/lib/data/tournaments'
+import type { Tournament, TournamentStatus } from '@/lib/types'
+
+const STATUS_CONFIG: Record<TournamentStatus, { label: string; bgClass: string }> = {
+  open:     { label: 'Registration Open',   bgClass: 'bg-[#e8f5ee] text-green' },
+  closed:   { label: 'Registration Closed', bgClass: 'bg-[#f5f0e8] text-[#8a7040]' },
+  full:     { label: 'Full',                bgClass: 'bg-[#fceaea] text-[#c0392b]' },
+  upcoming: { label: 'Coming Soon',         bgClass: 'bg-[#eaf0f5] text-[#1e3a7b]' },
+  past:     { label: 'Completed',           bgClass: 'bg-oat-dark text-mid' },
+}
 
 interface TournamentRowProps {
   tournament: Tournament
@@ -41,34 +48,10 @@ export default function TournamentRow({ tournament: t }: TournamentRowProps) {
         </div>
       </div>
 
-      <div className="px-5 py-4 flex flex-col items-end justify-center gap-2 shrink-0 min-w-[160px]">
+      <div className="px-5 py-4 flex flex-col items-end justify-center shrink-0">
         <span className={`text-[9px] font-bold tracking-[1.5px] uppercase px-2.5 py-1 rounded-[20px] whitespace-nowrap ${status.bgClass}`}>
           {status.label}
         </span>
-
-        {t.status === 'open' ? (
-          t.regUrl ? (
-            <a
-              href={t.regUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 font-body text-[9.5px] font-bold tracking-[1.5px] uppercase rounded-[2px] bg-green text-oat hover:bg-green-dark transition-colors whitespace-nowrap"
-            >
-              Register Now
-            </a>
-          ) : (
-            <button className="px-4 py-2 font-body text-[9.5px] font-bold tracking-[1.5px] uppercase rounded-[2px] bg-green text-oat hover:bg-green-dark transition-colors whitespace-nowrap">
-              Register Now
-            </button>
-          )
-        ) : (
-          <button
-            disabled
-            className="px-4 py-2 font-body text-[9.5px] font-bold tracking-[1.5px] uppercase rounded-[2px] bg-oat-dark text-line cursor-not-allowed whitespace-nowrap"
-          >
-            {t.status === 'full' ? 'Full' : t.status === 'past' ? 'Completed' : 'Closed'}
-          </button>
-        )}
       </div>
     </div>
   )

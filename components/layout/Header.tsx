@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const NAV_LINKS = [
-  { href: '/', label: 'Rankings' },
+  { href: '/rankings', label: 'Rankings' },
   { href: '/calendar', label: 'Tournament Calendar' },
 ]
 
@@ -13,7 +13,7 @@ export default function Header() {
 
   return (
     <header className="bg-green-dark h-[62px] flex items-center justify-between px-9 sticky top-0 z-[300] shadow-[0_2px_16px_rgba(0,0,0,.22)]">
-      <div className="flex items-center">
+      <Link href="/" className="flex items-center">
         <span className="font-display text-2xl font-semibold text-oat tracking-[0.5px]">
           Play Padel
         </span>
@@ -21,7 +21,7 @@ export default function Header() {
         <span className="text-[9.5px] tracking-[3px] uppercase text-oat/40">
           Philippines
         </span>
-      </div>
+      </Link>
 
       <nav className="flex items-center gap-1">
         {NAV_LINKS.map(({ href, label }) => {
