@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { PlayerRanking, RankingCategory } from "@/lib/types";
 
@@ -149,9 +150,11 @@ export default function RankingsTable({
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-[11px]">
                       {player.image_link ? (
-                        <img
+                        <Image
                           src={player.image_link}
                           alt={player.name}
+                          width={34}
+                          height={34}
                           className="w-[34px] h-[34px] rounded-full object-cover shrink-0"
                         />
                       ) : (

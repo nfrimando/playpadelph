@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { PlayerRanking } from "@/lib/types";
 
@@ -60,9 +61,11 @@ function PodiumCard({ player, position }: PodiumCardProps) {
           {numeral}
         </span>
         {player.image_link ? (
-          <img
+          <Image
             src={player.image_link}
             alt={player.name}
+            width={56}
+            height={56}
             className="w-14 h-14 rounded-full object-cover mx-auto mb-2"
           />
         ) : flag ? (
@@ -105,9 +108,11 @@ function PodiumCard({ player, position }: PodiumCardProps) {
         {numeral}
       </span>
       {player.image_link ? (
-        <img
+        <Image
           src={player.image_link}
           alt={player.name}
+          width={56}
+          height={56}
           className="w-14 h-14 rounded-full object-cover mx-auto mb-2"
         />
       ) : flag ? (
