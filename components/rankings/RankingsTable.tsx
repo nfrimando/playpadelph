@@ -38,7 +38,7 @@ const FLAGS: Record<string, string> = {
 };
 
 function getFlag(nat: string | null) {
-  return FLAGS[nat?.toUpperCase()] ?? null;
+  return nat ? (FLAGS[nat.toUpperCase()] ?? null) : null;
 }
 
 function getInitials(name: string) {
