@@ -36,7 +36,7 @@ type PointWithEvent = {
 export async function getPlayerWithEvents(id: number): Promise<{
   player: DbPlayer
   events: PlayerEventEntry[]
-  rankingPoints: number
+  categoryPoints: { category: string; points: number }[]
 } | null> {
   const [playerRes, pointsRes] = await Promise.all([
     supabase
@@ -58,8 +58,8 @@ export async function getPlayerWithEvents(id: number): Promise<{
   cutoff.setDate(today.getDate() - 364)
   const cutoffStr = cutoff.toISOString().split('T')[0]
 
-  let rankingPoints = 0
   const events: PlayerEventEntry[] = []
+  const pointsByCategory = new Map<string, number>()
 
   for (const row of (pointsRes.data ?? []) as unknown as PointWithEvent[]) {
     if (!row.event) continue
@@ -73,9 +73,14 @@ export async function getPlayerWithEvents(id: number): Promise<{
       venue: row.event.venue,
     })
     if (row.date_added >= cutoffStr) {
-      rankingPoints += row.points
+      const cat = row.event.category
+      pointsByCategory.set(cat, (pointsByCategory.get(cat) ?? 0) + row.points)
     }
   }
 
-  return { player: playerRes.data, events, rankingPoints }
+  const categoryPoints = Array.from(pointsByCategory.entries()).map(
+    ([category, points]) => ({ category, points })
+  )
+
+  return { player: playerRes.data, events, categoryPoints }
 }

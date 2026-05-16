@@ -97,13 +97,13 @@ function CategoryBadge({ category }: { category: string }) {
 interface PlayerProfileViewProps {
   player: DbPlayer;
   events: PlayerEventEntry[];
-  rankingPoints: number;
+  categoryPoints: { category: string; points: number }[];
 }
 
 export default function PlayerProfileView({
   player,
   events,
-  rankingPoints,
+  categoryPoints,
 }: PlayerProfileViewProps) {
   const flag = getFlag(player.nationality);
   const initials = getInitials(player.name);
@@ -145,6 +145,7 @@ export default function PlayerProfileView({
               alt={player.name}
               width={72}
               height={72}
+              unoptimized
               className="w-[72px] h-[72px] rounded-full object-cover shrink-0 border-2 border-white/10"
             />
           ) : (
@@ -168,20 +169,42 @@ export default function PlayerProfileView({
         </div>
 
         <div className="flex gap-10 pt-7 border-t border-oat/10">
-          {[
-            { value: rankingPoints.toLocaleString(), label: "Ranking Points" },
-            { value: String(events.length), label: "Events Attended" },
-            { value: periodLabel, label: "Current Period" },
-          ].map(({ value, label }) => (
-            <div key={label}>
+          {categoryPoints.map(({ category, points }) => (
+            <div key={category}>
               <span className="font-display text-[38px] font-semibold text-oat block leading-none">
-                {value}
+                {points.toLocaleString()}
               </span>
               <span className="text-[9px] tracking-[2.5px] uppercase text-oat/35 block mt-1.5">
-                {label}
+                {category}
               </span>
             </div>
           ))}
+          {categoryPoints.length === 0 && (
+            <div>
+              <span className="font-display text-[38px] font-semibold text-oat block leading-none">
+                0
+              </span>
+              <span className="text-[9px] tracking-[2.5px] uppercase text-oat/35 block mt-1.5">
+                Ranking Points
+              </span>
+            </div>
+          )}
+          <div>
+            <span className="font-display text-[38px] font-semibold text-oat block leading-none">
+              {events.length}
+            </span>
+            <span className="text-[9px] tracking-[2.5px] uppercase text-oat/35 block mt-1.5">
+              Events Attended
+            </span>
+          </div>
+          <div>
+            <span className="font-display text-[38px] font-semibold text-oat block leading-none">
+              {periodLabel}
+            </span>
+            <span className="text-[9px] tracking-[2.5px] uppercase text-oat/35 block mt-1.5">
+              Current Period
+            </span>
+          </div>
         </div>
       </div>
 

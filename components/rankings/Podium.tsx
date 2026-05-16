@@ -66,6 +66,7 @@ function PodiumCard({ player, position }: PodiumCardProps) {
             alt={player.name}
             width={56}
             height={56}
+            unoptimized
             className="w-14 h-14 rounded-full object-cover mx-auto mb-2"
           />
         ) : flag ? (
@@ -113,6 +114,7 @@ function PodiumCard({ player, position }: PodiumCardProps) {
           alt={player.name}
           width={56}
           height={56}
+          unoptimized
           className="w-14 h-14 rounded-full object-cover mx-auto mb-2"
         />
       ) : flag ? (

@@ -155,6 +155,7 @@ export default function RankingsTable({
                           alt={player.name}
                           width={34}
                           height={34}
+                          unoptimized
                           className="w-[34px] h-[34px] rounded-full object-cover shrink-0"
                         />
                       ) : (
