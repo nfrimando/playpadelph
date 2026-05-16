@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #f0ede4;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4cfc6;
+  border-radius: 2px;
+}
+
+/* Hero watermark text */
+.hero-watermark::before {
+  content: 'PP';
+  position: absolute;
+  right: -20px;
+  bottom: -50px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 280px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.03);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.cal-hero-watermark::before {
+  content: '2026';
+  position: absolute;
+  right: -10px;
+  bottom: -30px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 220px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.04);
+  line-height: 1;
+  pointer-events: none;
+}
