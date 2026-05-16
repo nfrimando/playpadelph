@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { DbPlayer, PlayerEventEntry } from "@/lib/types";
 
@@ -139,9 +140,11 @@ export default function PlayerProfileView({
 
         <div className="flex items-center gap-5 mb-6">
           {player.image_link ? (
-            <img
+            <Image
               src={player.image_link}
               alt={player.name}
+              width={72}
+              height={72}
               className="w-[72px] h-[72px] rounded-full object-cover shrink-0 border-2 border-white/10"
             />
           ) : (

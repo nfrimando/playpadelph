@@ -37,7 +37,7 @@ const FLAGS: Record<string, string> = {
 const NUMERALS = ["I", "II", "III"];
 
 function getFlag(nat: string | null) {
-  return FLAGS[nat?.toUpperCase()] ?? null;
+  return nat ? (FLAGS[nat.toUpperCase()] ?? null) : null;
 }
 
 interface PodiumCardProps {
