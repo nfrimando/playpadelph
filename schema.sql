@@ -7,10 +7,10 @@ CREATE TABLE public.events (
   category text NOT NULL,
   start_date date NOT NULL,
   end_date date NOT NULL,
-  venue text,
-  status text,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   updated_at timestamp with time zone NOT NULL DEFAULT now(),
+  venue text,
+  status text,
   CONSTRAINT events_pkey PRIMARY KEY (id)
 );
 CREATE TABLE public.players (
@@ -20,7 +20,7 @@ CREATE TABLE public.players (
   image_link text,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   updated_at timestamp with time zone NOT NULL DEFAULT now(),
-  nationality text DEFAULT ''::text,
+  nationality text,
   CONSTRAINT players_pkey PRIMARY KEY (id)
 );
 CREATE TABLE public.points (
@@ -34,4 +34,11 @@ CREATE TABLE public.points (
   CONSTRAINT points_pkey PRIMARY KEY (id),
   CONSTRAINT points_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.players(id),
   CONSTRAINT points_event_id_fkey FOREIGN KEY (event_id) REFERENCES public.events(id)
+);
+CREATE TABLE public.profiles (
+  id uuid NOT NULL,
+  role text NOT NULL DEFAULT 'user'::text CHECK (role = ANY (ARRAY['user'::text, 'admin'::text])),
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT profiles_pkey PRIMARY KEY (id),
+  CONSTRAINT profiles_id_fkey FOREIGN KEY (id) REFERENCES auth.users(id)
 );

@@ -38,7 +38,7 @@ export async function getRankings(): Promise<{ rankings: Rankings; meta: Ranking
   const totals = new Map<string, {
     id: number
     name: string
-    nationality: string
+    nationality: string | null
     image_link: string | null
     category: RankingCategory
     total: number
@@ -62,7 +62,7 @@ export async function getRankings(): Promise<{ rankings: Rankings; meta: Ranking
       totals.set(key, {
         id: row.player.id,
         name: row.player.name,
-        nationality: row.player.nationality ?? '',
+        nationality: row.player.nationality,
         image_link: row.player.image_link,
         category: cat,
         total: row.points,

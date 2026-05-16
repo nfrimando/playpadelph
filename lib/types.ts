@@ -2,7 +2,7 @@ export interface PlayerRanking {
   id?: number
   rank: number
   name: string
-  nationality: string
+  nationality: string | null
   points: number
   image_link?: string | null
 }
@@ -21,7 +21,7 @@ export interface DbPlayer {
   id: number
   name: string
   nickname: string | null
-  nationality: string
+  nationality: string | null
   image_link: string | null
 }
 

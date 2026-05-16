@@ -129,3 +129,72 @@ export async function bulkDeletePoints(ids: number[]) {
   revalidatePath('/admin/points')
   revalidatePath('/rankings')
 }
+
+export interface BulkCreateConflict {
+  rowIndex: number
+  player_id: number
+  existing_points: number
+}
+
+export async function bulkCreatePoints(
+  data: Omit<DbPoint, 'id'>[],
+): Promise<{ conflicts: BulkCreateConflict[] }> {
+  const supabase = await assertAdmin()
+
+  // Check for existing (player_id, event_id) pairs — conflict detection
+  const eventId = data[0]?.event_id
+  const playerIds = data.map(d => d.player_id)
+  const { data: existing, error: fetchErr } = await supabase
+    .from('points')
+    .select('player_id, points')
+    .eq('event_id', eventId)
+    .in('player_id', playerIds)
+  if (fetchErr) throw new Error(fetchErr.message)
+
+  const existingMap = new Map<number, number>(
+    (existing ?? []).map(r => [r.player_id, r.points]),
+  )
+  const conflicts: BulkCreateConflict[] = data
+    .map((row, i) =>
+      existingMap.has(row.player_id)
+        ? { rowIndex: i + 1, player_id: row.player_id, existing_points: existingMap.get(row.player_id)! }
+        : null,
+    )
+    .filter((c): c is BulkCreateConflict => c !== null)
+
+  if (conflicts.length > 0) return { conflicts }
+
+  const { error } = await supabase.from('points').insert(data)
+  if (error) throw new Error(error.message)
+  revalidatePath('/admin/points')
+  revalidatePath('/rankings')
+  return { conflicts: [] }
+}
+
+export async function bulkUpdatePoints(
+  updates: { id: number; points: number; date_added: string }[],
+) {
+  const supabase = await assertAdmin()
+  await Promise.all(
+    updates.map(({ id, points, date_added }) =>
+      supabase.from('points').update({ points, date_added }).eq('id', id),
+    ),
+  )
+  revalidatePath('/admin/points')
+  revalidatePath('/rankings')
+}
+
+export async function replaceEventPoints(
+  eventId: number,
+  data: Omit<DbPoint, 'id'>[],
+) {
+  const supabase = await assertAdmin()
+  const { error: delErr } = await supabase.from('points').delete().eq('event_id', eventId)
+  if (delErr) throw new Error(delErr.message)
+  if (data.length > 0) {
+    const { error: insErr } = await supabase.from('points').insert(data)
+    if (insErr) throw new Error(insErr.message)
+  }
+  revalidatePath('/admin/points')
+  revalidatePath('/rankings')
+}
