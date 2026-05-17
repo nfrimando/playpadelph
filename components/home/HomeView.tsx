@@ -25,12 +25,12 @@ export default function HomeView() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-green relative overflow-hidden hero-watermark px-9 pt-[60px] pb-[52px]">
+      <section className="bg-green relative overflow-hidden hero-watermark px-4 sm:px-9 pt-10 pb-9 sm:pt-[60px] sm:pb-[52px]">
         <div className="max-w-content mx-auto relative z-10">
           <p className="text-[9.5px] tracking-[4px] uppercase text-matcha mb-4">
             Philippine Islands Padel Tour
           </p>
-          <h1 className="font-display text-[68px] font-semibold text-oat leading-[.9] tracking-[-1px]">
+          <h1 className="font-display text-[42px] sm:text-[68px] font-semibold text-oat leading-[.9] tracking-[-1px]">
             Play Padel
             <br />
             <em className="text-oat/50 not-italic">Philippines</em>
@@ -50,15 +50,15 @@ export default function HomeView() {
 
       {/* Feature cards */}
       <section className="bg-oat py-14">
-        <div className="max-w-content mx-auto px-9">
-          <div className="grid grid-cols-2 gap-6">
+        <div className="max-w-content mx-auto px-4 sm:px-9">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {SECTIONS.map(({ href, overline, title, titleItalic, description, cta }) => (
               <div
                 key={href}
                 className="bg-white border border-line rounded-[3px] overflow-hidden flex flex-col"
               >
                 <div className="h-[3px] bg-gradient-to-r from-matcha to-green" />
-                <div className="p-8 flex flex-col flex-1">
+                <div className="p-5 sm:p-8 flex flex-col flex-1">
                   <p className="text-[9px] tracking-[3px] uppercase text-matcha mb-5">
                     {overline}
                   </p>

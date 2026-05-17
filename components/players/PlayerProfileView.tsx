@@ -116,7 +116,7 @@ export default function PlayerProfileView({
   return (
     <>
       {/* Hero */}
-      <div className="bg-green-dark px-9 pt-[52px] pb-[48px] overflow-hidden relative">
+      <div className="bg-green-dark px-4 sm:px-9 pt-9 pb-8 sm:pt-[52px] sm:pb-[48px] overflow-hidden relative">
         <Link
           href="/rankings"
           className="inline-flex items-center gap-1.5 text-[9px] tracking-[2.5px] uppercase text-oat/40 hover:text-oat/70 transition-colors mb-6 font-body font-semibold"
@@ -138,7 +138,7 @@ export default function PlayerProfileView({
           Player Profile
         </div>
 
-        <div className="flex items-center gap-5 mb-6">
+        <div className="flex items-start gap-4 sm:gap-5 mb-6">
           {player.image_link ? (
             <Image
               src={player.image_link}
@@ -154,7 +154,7 @@ export default function PlayerProfileView({
             </div>
           )}
           <div>
-            <h1 className="font-display text-[52px] font-semibold text-oat leading-[.92] tracking-[-1px]">
+            <h1 className="font-display text-[32px] sm:text-[52px] font-semibold text-oat leading-[.92] tracking-[-1px]">
               {player.name}
             </h1>
             {player.nationality && (
@@ -168,10 +168,10 @@ export default function PlayerProfileView({
           </div>
         </div>
 
-        <div className="flex gap-10 pt-7 border-t border-oat/10">
+        <div className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-10 pt-7 border-t border-oat/10">
           {categoryPoints.map(({ category, points }) => (
             <div key={category}>
-              <span className="font-display text-[38px] font-semibold text-oat block leading-none">
+              <span className="font-display text-[28px] sm:text-[38px] font-semibold text-oat block leading-none">
                 {points.toLocaleString()}
               </span>
               <span className="text-[9px] tracking-[2.5px] uppercase text-oat/35 block mt-1.5">
@@ -181,7 +181,7 @@ export default function PlayerProfileView({
           ))}
           {categoryPoints.length === 0 && (
             <div>
-              <span className="font-display text-[38px] font-semibold text-oat block leading-none">
+              <span className="font-display text-[28px] sm:text-[38px] font-semibold text-oat block leading-none">
                 0
               </span>
               <span className="text-[9px] tracking-[2.5px] uppercase text-oat/35 block mt-1.5">
@@ -190,7 +190,7 @@ export default function PlayerProfileView({
             </div>
           )}
           <div>
-            <span className="font-display text-[38px] font-semibold text-oat block leading-none">
+            <span className="font-display text-[28px] sm:text-[38px] font-semibold text-oat block leading-none">
               {events.length}
             </span>
             <span className="text-[9px] tracking-[2.5px] uppercase text-oat/35 block mt-1.5">
@@ -198,7 +198,7 @@ export default function PlayerProfileView({
             </span>
           </div>
           <div>
-            <span className="font-display text-[38px] font-semibold text-oat block leading-none">
+            <span className="font-display text-[28px] sm:text-[38px] font-semibold text-oat block leading-none">
               {periodLabel}
             </span>
             <span className="text-[9px] tracking-[2.5px] uppercase text-oat/35 block mt-1.5">
@@ -209,7 +209,7 @@ export default function PlayerProfileView({
       </div>
 
       {/* Tournament History */}
-      <div className="max-w-content mx-auto px-9 py-10 pb-[72px]">
+      <div className="max-w-content mx-auto px-4 sm:px-9 py-10 pb-[72px]">
         <div className="text-[9.5px] tracking-[3.5px] uppercase text-mid font-semibold mb-5">
           Tournament History
         </div>
@@ -220,6 +220,7 @@ export default function PlayerProfileView({
           </div>
         ) : (
           <div className="bg-white rounded-[3px] border border-line overflow-hidden">
+            <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
                 <tr>
@@ -280,6 +281,7 @@ export default function PlayerProfileView({
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
         )}
       </div>

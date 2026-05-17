@@ -32,6 +32,14 @@
    - Prevent N+1 query patterns by designing query shapes per screen.
 4. **Scalable defaults**
    - Design APIs/components so adding match history and deeper analytics remains straightforward.
+5. **Mobile-first responsive design**
+   - Use `px-4 sm:px-9` for all horizontal page padding (mobile 16px, desktop 36px).
+   - Hero headings: `text-[42px] sm:text-[68px]` (scale proportionally for smaller heroes, e.g. `text-[32px] sm:text-[52px]`).
+   - Hero stat numbers: `text-[28px] sm:text-[38px]`.
+   - Stats rows: `flex flex-wrap gap-x-8 gap-y-4 sm:gap-10` — always allow wrapping.
+   - All data tables must be wrapped in `<div className="overflow-x-auto">` for horizontal scroll on mobile.
+   - Multi-column grids default to `grid-cols-1` and add columns at `sm:` breakpoint (e.g. `grid-cols-1 sm:grid-cols-2`).
+   - Never use a fixed desktop padding/size class without a smaller mobile default first.
 
 ## Stack
 

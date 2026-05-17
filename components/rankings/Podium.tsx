@@ -54,7 +54,7 @@ function PodiumCard({ player, position }: PodiumCardProps) {
 
   if (position === 0) {
     return (
-      <div className="rounded-[3px] p-7 pb-6 text-center bg-green shadow-[0_14px_40px_rgba(26,92,56,.26)] -translate-y-2.5">
+      <div className="rounded-[3px] p-5 pb-4 sm:p-7 sm:pb-6 text-center bg-green shadow-[0_14px_40px_rgba(26,92,56,.26)] sm:-translate-y-2.5">
         <span
           className={`font-display text-5xl font-semibold leading-none mb-3 block ${numeralColors[0]}`}
         >
@@ -102,7 +102,7 @@ function PodiumCard({ player, position }: PodiumCardProps) {
   }
 
   return (
-    <div className="rounded-[3px] p-7 pb-6 text-center bg-white border border-line shadow-[0_3px_12px_rgba(0,0,0,.06)]">
+    <div className="rounded-[3px] p-5 pb-4 sm:p-7 sm:pb-6 text-center bg-white border border-line shadow-[0_3px_12px_rgba(0,0,0,.06)]">
       <span
         className={`font-display text-5xl font-semibold leading-none mb-3 block ${numeralColors[position]}`}
       >
@@ -164,13 +164,18 @@ export default function Podium({ players }: PodiumProps) {
     top3[2] ? { player: top3[2], position: 2 as const } : null,
   ];
 
+  // visualOrder = [2nd, 1st, 3rd]; on mobile reorder to 1st, 2nd, 3rd via CSS order
+  const mobileOrders = ['order-2', 'order-1', 'order-3']
+
   return (
-    <div className="grid grid-cols-3 gap-3.5 mb-9 items-end">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-9 sm:items-end">
       {visualOrder.map((item, i) =>
         item ? (
-          <PodiumCard key={i} player={item.player} position={item.position} />
+          <div key={i} className={`${mobileOrders[i]} sm:order-none`}>
+            <PodiumCard player={item.player} position={item.position} />
+          </div>
         ) : (
-          <div key={i} />
+          <div key={i} className={`${mobileOrders[i]} sm:order-none`} />
         ),
       )}
     </div>

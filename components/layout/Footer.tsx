@@ -8,7 +8,7 @@ export default function Footer() {
   if (pathname.startsWith('/admin')) return null
 
   return (
-    <footer className="bg-green-dark pt-12 pb-7 px-9">
+    <footer className="bg-green-dark pt-12 pb-7 px-4 sm:px-9">
       <div className="max-w-content mx-auto">
         <div className="grid grid-cols-[1.2fr_1fr_1fr] gap-12 pb-9 border-b border-oat/[0.08] max-[720px]:grid-cols-1 max-[720px]:gap-8">
           <div>

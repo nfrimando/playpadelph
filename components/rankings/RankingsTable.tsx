@@ -77,7 +77,7 @@ export default function RankingsTable({
 
   return (
     <div className="bg-white rounded-[3px] border border-line overflow-hidden">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-line">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 sm:px-6 py-4 border-b border-line">
         <span className="text-[9px] tracking-[3px] uppercase text-mid font-semibold">
           Full Rankings · {CATEGORY_LABELS[category]}
         </span>
@@ -95,7 +95,7 @@ export default function RankingsTable({
             <path d="m21 21-4.35-4.35" />
           </svg>
           <input
-            className="pl-8 pr-3 py-2 border border-line rounded-[3px] font-body text-xs text-ink bg-oat outline-none w-[200px] transition-all focus:border-green focus:bg-white"
+            className="pl-8 pr-3 py-2 border border-line rounded-[3px] font-body text-xs text-ink bg-oat outline-none w-full sm:w-[200px] transition-all focus:border-green focus:bg-white"
             placeholder="Search player…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -103,6 +103,7 @@ export default function RankingsTable({
         </div>
       </div>
 
+      <div className="overflow-x-auto">
       <table className="w-full border-collapse">
         <thead>
           <tr>
@@ -118,7 +119,7 @@ export default function RankingsTable({
             <th className="px-4 py-[10px] text-right text-[8.5px] font-bold tracking-[2.5px] uppercase text-mid bg-oat border-b border-line pr-2">
               Points
             </th>
-            <th className="bg-oat border-b border-line w-[140px] pr-5" />
+            <th className="bg-oat border-b border-line w-[140px] pr-5 hidden sm:table-cell" />
           </tr>
         </thead>
         <tbody>
@@ -188,7 +189,7 @@ export default function RankingsTable({
                   <td className="px-4 py-3 pr-2 text-right font-display text-2xl font-semibold text-green">
                     {player.points.toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 pr-5 w-[140px]">
+                  <td className="px-4 py-3 pr-5 w-[140px] hidden sm:table-cell">
                     <div className="h-[3px] bg-oat-dark rounded-sm overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-matcha to-green rounded-sm"
@@ -202,6 +203,7 @@ export default function RankingsTable({
           )}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

@@ -39,11 +39,11 @@ export default function CalendarView({ years, currentYear }: CalendarViewProps) 
   return (
     <>
       {/* Hero */}
-      <div className="bg-green px-9 pt-[60px] pb-[52px] overflow-hidden relative cal-hero-watermark">
+      <div className="bg-green px-4 sm:px-9 pt-10 pb-9 sm:pt-[60px] sm:pb-[52px] overflow-hidden relative cal-hero-watermark">
         <div className="text-[9.5px] tracking-[4px] uppercase text-matcha mb-3">
           Philippine Islands Padel Tour
         </div>
-        <h1 className="font-display text-[68px] font-semibold text-oat leading-[.9] tracking-[-1px] mb-[18px]">
+        <h1 className="font-display text-[42px] sm:text-[68px] font-semibold text-oat leading-[.9] tracking-[-1px] mb-[18px]">
           Tournament<br />
           <em className="text-oat/50">Calendar</em>
         </h1>
@@ -58,7 +58,7 @@ export default function CalendarView({ years, currentYear }: CalendarViewProps) 
       </div>
 
       {/* Year Tabs */}
-      <div className="bg-white border-b border-line px-9 flex sticky top-[62px] z-[200]">
+      <div className="bg-white border-b border-line px-4 sm:px-9 flex sticky top-[62px] z-[200] overflow-x-auto">
         {years.map(({ year, total }) => {
           const isActive = activeYear === year
           return (
@@ -82,7 +82,7 @@ export default function CalendarView({ years, currentYear }: CalendarViewProps) 
       </div>
 
       {/* Content */}
-      <div className="max-w-content mx-auto px-9 py-12 pb-[72px]">
+      <div className="max-w-content mx-auto px-4 sm:px-9 py-12 pb-[72px]">
         {activeYear === currentYear && (
           <label className="flex items-center gap-2.5 mb-6 cursor-pointer select-none">
             <input
@@ -102,7 +102,7 @@ export default function CalendarView({ years, currentYear }: CalendarViewProps) 
         ) : (
           monthGroups.map(({ month, tournaments: ts }) => (
             <div key={month} className="mb-12">
-              <div className="font-display text-[52px] font-semibold text-green leading-none mb-5 pb-3 border-b-2 border-line">
+              <div className="font-display text-[32px] sm:text-[52px] font-semibold text-green leading-none mb-5 pb-3 border-b-2 border-line">
                 {month}
               </div>
               <div className="flex flex-col gap-3">

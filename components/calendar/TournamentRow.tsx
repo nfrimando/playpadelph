@@ -18,15 +18,20 @@ export default function TournamentRow({ tournament: t }: TournamentRowProps) {
 
   return (
     <div className={`bg-white border border-line rounded-[3px] flex items-stretch overflow-hidden transition-shadow hover:shadow-[0_4px_20px_rgba(0,0,0,.08)] ${t.status === 'past' ? 'opacity-50' : ''}`}>
-      <div className="bg-green text-oat min-w-[80px] flex flex-col items-center justify-center px-3 py-4 text-center shrink-0">
+      <div className="bg-green text-oat min-w-[72px] sm:min-w-[80px] flex flex-col items-center justify-center px-2 sm:px-3 py-4 text-center shrink-0">
         <div className="font-display text-[28px] font-bold leading-none text-butter">{dayPart}</div>
         <div className="text-[8px] tracking-[2px] uppercase text-oat/60 mt-[3px]">
           {t.month.substring(0, 3).toUpperCase()}
         </div>
       </div>
 
-      <div className="flex-1 px-5 py-4 flex flex-col justify-center gap-1.5">
-        <div className="font-display text-[19px] font-semibold text-ink leading-[1.2]">{t.name}</div>
+      <div className="flex-1 px-4 sm:px-5 py-4 flex flex-col justify-center gap-1.5 min-w-0">
+        <div className="flex flex-wrap items-start gap-x-2 gap-y-1">
+          <div className="font-display text-[17px] sm:text-[19px] font-semibold text-ink leading-[1.2]">{t.name}</div>
+          <span className={`sm:hidden text-[9px] font-bold tracking-[1.5px] uppercase px-2.5 py-1 rounded-[20px] whitespace-nowrap shrink-0 ${status.bgClass}`}>
+            {status.label}
+          </span>
+        </div>
         <div className="flex flex-wrap gap-2 items-center">
           <span className="text-[11px] text-mid flex items-center gap-1">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -48,7 +53,7 @@ export default function TournamentRow({ tournament: t }: TournamentRowProps) {
         </div>
       </div>
 
-      <div className="px-5 py-4 flex flex-col items-end justify-center shrink-0">
+      <div className="hidden sm:flex px-5 py-4 flex-col items-end justify-center shrink-0">
         <span className={`text-[9px] font-bold tracking-[1.5px] uppercase px-2.5 py-1 rounded-[20px] whitespace-nowrap ${status.bgClass}`}>
           {status.label}
         </span>

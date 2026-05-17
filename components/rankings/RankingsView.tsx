@@ -24,11 +24,11 @@ export default function RankingsView({ data, playerCount, meta }: RankingsViewPr
   return (
     <>
       {/* Hero */}
-      <div className="bg-green px-9 pt-[60px] pb-[52px] overflow-hidden relative hero-watermark">
+      <div className="bg-green px-4 sm:px-9 pt-10 pb-9 sm:pt-[60px] sm:pb-[52px] overflow-hidden relative hero-watermark">
         <div className="text-[9.5px] tracking-[4px] uppercase text-matcha mb-3">
           Philippine Islands Padel Tour
         </div>
-        <h1 className="font-display text-[68px] font-semibold text-oat leading-[.9] tracking-[-1px] mb-[18px]">
+        <h1 className="font-display text-[42px] sm:text-[68px] font-semibold text-oat leading-[.9] tracking-[-1px] mb-[18px]">
           Player<br />
           <em className="text-oat/50">Rankings</em>
         </h1>
@@ -40,7 +40,7 @@ export default function RankingsView({ data, playerCount, meta }: RankingsViewPr
           <span className="w-1.5 h-1.5 rounded-full bg-matcha shrink-0" />
           {meta.periodStart} – {meta.periodEnd}
         </div>
-        <div className="flex gap-10 mt-9 pt-8 border-t border-oat/10">
+        <div className="flex flex-wrap gap-x-8 gap-y-5 sm:gap-10 mt-9 pt-8 border-t border-oat/10">
           {[
             { value: String(meta.categoryCount), label: 'Categories' },
             { value: `${playerCount}+`,           label: 'Ranked Players' },
@@ -48,7 +48,7 @@ export default function RankingsView({ data, playerCount, meta }: RankingsViewPr
             { value: 'Rolling',     label: '52-Week Points' },
           ].map(({ value, label }) => (
             <div key={label}>
-              <span className="font-display text-[38px] font-semibold text-oat block">{value}</span>
+              <span className="font-display text-[28px] sm:text-[38px] font-semibold text-oat block">{value}</span>
               <span className="text-[9px] tracking-[2.5px] uppercase text-oat/35 block mt-0.5">{label}</span>
             </div>
           ))}
@@ -80,7 +80,7 @@ export default function RankingsView({ data, playerCount, meta }: RankingsViewPr
       </div>
 
       {/* Content */}
-      <div className="max-w-content mx-auto px-9 py-10 pb-[72px]">
+      <div className="max-w-content mx-auto px-4 sm:px-9 py-10 pb-[72px]">
         <Podium players={data[active]} />
         <RankingsTable category={active} players={data[active]} />
       </div>

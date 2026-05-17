@@ -44,3 +44,8 @@ html {
   line-height: 1;
   pointer-events: none;
 }
+
+@media (max-width: 639px) {
+  .hero-watermark::before { font-size: 160px; bottom: -30px; right: -10px; }
+  .cal-hero-watermark::before { font-size: 130px; bottom: -20px; right: -5px; }
+}
